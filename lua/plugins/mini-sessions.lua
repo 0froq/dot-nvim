@@ -5,6 +5,7 @@ return {
   opts = {
     autoread = false,
     autowrite = true,
+    file = '.session.vim',
     force = {
       write = true
     }
