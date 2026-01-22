@@ -1,0 +1,10 @@
+if vim.g.vscode then
+  return {}
+else
+  return {
+    "nvim-mini/mini.cursorword",
+    version = false,
+    lazy = false,
+    opts = {}
+  }
+end

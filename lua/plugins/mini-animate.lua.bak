@@ -1,0 +1,14 @@
+if vim.g.vscode then
+  return {}
+else
+  return {
+    'nvim-mini/mini.animate',
+    version = false,
+    lazy = false,
+    opts = {
+      cursor = {
+        enable = true,
+      }
+    }
+  }
+end

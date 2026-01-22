@@ -1,0 +1,15 @@
+return {
+  'rcarriga/nvim-notify',
+  lazy = false,
+  opts = {
+    fps = 60,
+    icons = {
+      DEBUG = "X",
+      ERROR = "E",
+      INFO = "I",
+      WARN = "W",
+      TRACE = "T"
+    },
+    render = "minimal",
+  }
+}

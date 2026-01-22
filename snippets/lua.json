@@ -1,0 +1,20 @@
+{
+  "Disable": {
+    "prefix": "..disable",
+    "body": [
+      "enable = false,"
+    ]
+  },
+  "Disabled": {
+    "prefix": "..disabled",
+    "body": [
+      "enabled = false"
+    ]
+  },
+  "Import util func": {
+    "prefix": "..ufunc",
+    "body": [
+      "local $1 = require('utils').$1"
+    ]
+  }
+}

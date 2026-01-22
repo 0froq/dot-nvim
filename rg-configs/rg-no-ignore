@@ -1,0 +1,10 @@
+--hidden
+--glob=!.git/*
+--glob=!node_modules/*
+--glob=!target/*
+--glob=!dist/*
+--glob=!build/*
+--glob=!*.lock
+--glob=!.DS_Store
+--max-depth=8
+--max-filesize=1M
