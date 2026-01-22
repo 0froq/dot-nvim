@@ -106,7 +106,7 @@ vim.api.nvim_create_autocmd('ExitPre', {
     if #vim.fn.getbufinfo({ buflisted = 1 }) == 0 then
       return
     end
-    require('mini.sessions').write('Session.vim')
+    require('mini.sessions').write('.session.vim')
   end
 })
 
