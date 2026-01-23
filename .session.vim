@@ -14,9 +14,10 @@ else
   set shortmess=aoO
 endif
 badd +19 lua/plugins/mini-sessions.lua
+badd +1 .gitignore
 argglobal
 %argdel
-edit lua/plugins/mini-sessions.lua
+edit .gitignore
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -25,6 +26,7 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 argglobal
+balt lua/plugins/mini-sessions.lua
 setlocal foldmethod=expr
 setlocal foldexpr=v:lua.vim.treesitter.foldexpr()
 setlocal foldmarker={{{,}}}
@@ -33,16 +35,12 @@ setlocal foldlevel=99
 setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
-1
-sil! normal! zo
-14
-sil! normal! zo
-let s:l = 19 - ((18 * winheight(0) + 21) / 42)
+let s:l = 1 - ((0 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 19
-normal! 027|
+keepjumps 1
+normal! 012|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
