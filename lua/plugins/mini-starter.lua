@@ -9,8 +9,9 @@ else
       local MiniStarter = require('mini.starter')
 
       MiniStarter.setup({
+        query_updaters = 'abcdefghijklmnopqrstuvwxyz0123456789',
         items = {
-          MiniStarter.sections.sessions(5, true),
+          MiniStarter.sections.sessions(3, true),
           MiniStarter.sections.recent_files(5, true, true),
           -- MiniStarter.sections.builtin_actions()
         },
