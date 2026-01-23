@@ -5,6 +5,7 @@ return {
   opts = {
     autoread = false,
     autowrite = true,
+    directory = '',
     file = '.session.vim',
     force = {
       write = true
@@ -15,7 +16,7 @@ return {
 
     local map = require('utils').map
 
-    MiniSessions.setup({ opts })
+    MiniSessions.setup(opts)
 
     map('n', '<leader>sw', function()
       MiniSessions.write('.session.vim')

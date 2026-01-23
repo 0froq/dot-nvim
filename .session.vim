@@ -13,15 +13,10 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +1 lua/filetypes.lua
-badd +46 lua/plugins/mini-pick.lua
-badd +208 ~/.config/zsh/.zshrc
-badd +161 lua/useMap.lua
-badd +1 .git/description
-badd +8 .git/config
+badd +19 lua/plugins/mini-sessions.lua
 argglobal
 %argdel
-edit .git/config
+edit lua/plugins/mini-sessions.lua
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -30,7 +25,6 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 argglobal
-balt .git/description
 setlocal foldmethod=expr
 setlocal foldexpr=v:lua.vim.treesitter.foldexpr()
 setlocal foldmarker={{{,}}}
@@ -39,12 +33,16 @@ setlocal foldlevel=99
 setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldenable
-let s:l = 8 - ((7 * winheight(0) + 21) / 42)
+1
+sil! normal! zo
+14
+sil! normal! zo
+let s:l = 19 - ((18 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 8
-normal! 0
+keepjumps 19
+normal! 027|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -60,6 +58,7 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
+nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :

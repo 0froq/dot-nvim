@@ -102,11 +102,14 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 -- When leave, write a session
 vim.api.nvim_create_autocmd('ExitPre', {
   -- If no files are open, don't write session
-  callback = function(args)
+  callback = function(_)
     if #vim.fn.getbufinfo({ buflisted = 1 }) == 0 then
       return
     end
-    require('mini.sessions').write('.session.vim')
+    require('mini.sessions').write(
+      '.session.vim',
+      { force = true }
+    )
   end
 })
 
