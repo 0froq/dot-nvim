@@ -22,6 +22,12 @@ return {
         --   return MiniSnippets.read_file(rel_path)
         -- end,
         MiniSnippets.gen_loader.from_lang(),
+
+        function(context)
+          local rel_path = '.snippets/' .. context.lang .. '.json'
+          if vim.fn.filereadable(rel_path) == 0 then return end
+          return MiniSnippets.read_file(rel_path)
+        end,
       },
       mappings = {
         expand = '<C-l>',
@@ -35,5 +41,17 @@ return {
     })
 
     MiniSnippets.start_lsp_server({ triggers = { '..' } })
+
+    local make_stop = function()
+      local au_opts = { pattern = '*:n', once = true }
+      au_opts.callback = function()
+        while MiniSnippets.session.get() do
+          MiniSnippets.session.stop()
+        end
+      end
+      vim.api.nvim_create_autocmd('ModeChanged', au_opts)
+    end
+    local opts = { pattern = 'MiniSnippetsSessionStart', callback = make_stop }
+    vim.api.nvim_create_autocmd('User', opts)
   end
 }
