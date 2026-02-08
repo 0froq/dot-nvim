@@ -2,7 +2,11 @@ return {
   'nvim-mini/mini.pick',
   version = false,
   lazy = false,
-  opts = {},
+  opts = {
+    window = {
+      prompt_prefix = ' > ',
+    }
+  },
   config = function(_, opts)
     local MiniPick = require('mini.pick')
 
@@ -38,33 +42,25 @@ return {
         'Pick files',
       },
       {
-        '<leader>fa',
+        '<leader>fw',
         {
           neovim = function()
-            pick_with_rg_config(MiniPick.builtin.files, 'no-ignore')
+            MiniPick.builtin.grep_live({
+              ignore_case = true,
+              smart_case = true,
+            })
           end,
-          vscode = '',
+          vscode = 'workbench.action.quickTextSearch',
         },
-        'Pick files (all)',
+        'Grep word',
+      },
+      {
+        '<leader>fh',
+        function()
+          MiniPick.builtin.help({ default_split = 'vertical' })
+        end,
+        'Pick help',
       }
     })
-
-
-    map('n', '<leader>fa', vscode_action(
-      function()
-        pick_with_rg_config(MiniPick.builtin.files, 'no-ignore')
-      end,
-      ''
-    ), 'Pick files (all)')
-
-    map('n', '<leader>fw', vscode_action(
-      MiniPick.builtin.grep_live,
-      'workbench.action.quickTextSearch'
-    ), 'Grep word')
-
-    map('n', '<leader>fh', vscode_action(
-      MiniPick.builtin.help,
-      ''
-    ), 'Pick helps')
   end,
 }

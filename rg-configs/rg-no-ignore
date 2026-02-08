@@ -6,5 +6,6 @@
 --glob=!build/*
 --glob=!*.lock
 --glob=!.DS_Store
+--glob=**/.vitepress/**
 --max-depth=8
 --max-filesize=1M
