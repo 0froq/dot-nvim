@@ -20,6 +20,7 @@ else
         end,
       },
       { 'saghen/blink.compat' },
+      { 'fang2hou/blink-copilot' },
       { 'Kaiser-Yang/blink-cmp-avante' },
       { 'jc-doyle/cmp-pandoc-references' },
       { 'echasnovski/mini.snippets' },

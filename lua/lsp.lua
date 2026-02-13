@@ -1,5 +1,13 @@
 -- A custom capabilities setup for Neovim LSP servers
-local capabilities = require('mini.completion').get_lsp_capabilities()
+-- local capabilities = require('mini.completion').get_lsp_capabilities()
+local capabilities = require('blink.cmp').get_lsp_capabilities({
+  textDocument = {
+    foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true
+    }
+  }
+})
 
 -- Enhanced capabilities for better completion and other features
 capabilities.textDocument.completion.completionItem.snippetSupport = true
