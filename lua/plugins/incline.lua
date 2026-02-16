@@ -60,7 +60,6 @@ return {
       local function get_harpoon_items()
         local harpoon = require('harpoon')
         local marks = harpoon:list().items
-        local current_file_path = vim.fn.expand('%:p:.')
         local label = {}
 
         -- if #label > 0 then

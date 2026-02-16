@@ -4,9 +4,7 @@ return {
   dir = '/Users/oQ/2_areas/development/nvim_plugins/headup.nvim',
   lazy = false,
   config = function()
-    local Headup = require('headup')
-
-    Headup.setup({
+    require('headup').setup({
       enabled = true,
       silent = false,
       time_format = '%Y-%m-%d %H:%M:%S',
@@ -32,6 +30,11 @@ return {
         pattern = '*',
         match_pattern = '.-[Ff]ile[%s_%-][Pp]ath:%s(.-)%s*$',
         content = 'file_path',
+      },
+      {
+        pattern = '*',
+        match_pattern = '.-[Gg]it[%s_%-][Ss]tatus:%s(.-)%s*$',
+        content = 'git_file_status',
       },
       {
         pattern = '*',

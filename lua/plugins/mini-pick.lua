@@ -9,11 +9,7 @@ return {
   },
   config = function(_, opts)
     local MiniPick = require('mini.pick')
-
-    local map = require('utils').map
-    local vscode_action = require('utils').vscode_action
     local useMap = require('useMap')
-    local pick_with_rg_config = require('utils').pick_with_rg_config
 
     MiniPick.setup(opts)
 

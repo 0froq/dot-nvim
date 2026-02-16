@@ -1,6 +1,6 @@
-if vim.g.vscode then
-  local useMap = require('useMap')
+local useMap = require('useMap')
 
+if vim.g.vscode then
   useMap.batch({
     mode = 'n',
     {
@@ -27,7 +27,7 @@ return {
   config = function(_, opts)
     local MiniBracketed = require('mini.bracketed')
 
-    -- Navigation between buffers with `b`
+    -- Buffer navigation
     useMap.batch({
       mode = 'n',
       {
@@ -38,8 +38,22 @@ return {
       {
         { ']b', '<leader>b]' },
         function() MiniBracketed.buffer('forward') end,
-        'Previous buffer'
+        'Next buffer'
       },
+      {
+        { '[B', '<leader>b{' },
+        function() MiniBracketed.buffer('first') end,
+        'First buffer'
+      },
+      {
+        { ']B', '<leader>b}' },
+        function() MiniBracketed.buffer('last') end,
+        'Last buffer'
+      },
+    })
+
+    useMap.batch({
+      mode = 'n',
       {
         { '[c', '<leader>c[' },
         function() MiniBracketed.comment('backward', { block_side = 'both' }) end,
@@ -51,6 +65,20 @@ return {
         'Next comment'
       },
       {
+        { '[C', '<leader>c{' },
+        function() MiniBracketed.comment('first', { block_side = 'both' }) end,
+        'First comment'
+      },
+      {
+        { ']C', '<leader>c}' },
+        function() MiniBracketed.comment('last', { block_side = 'both' }) end,
+        'Last comment'
+      }
+    })
+
+    useMap.batch({
+      mode = 'n',
+      {
         { '[x', '<leader>x[' },
         function() MiniBracketed.conflict('backward') end,
         'Previous conflict'
@@ -60,6 +88,20 @@ return {
         function() MiniBracketed.conflict('forward') end,
         'Next conflict'
       },
+      {
+        { '[X', '<leader>x{' },
+        function() MiniBracketed.conflict('first') end,
+        'First conflict'
+      },
+      {
+        { ']X', '<leader>x}' },
+        function() MiniBracketed.conflict('last') end,
+        'Last conflict'
+      }
+    })
+
+    useMap.batch({
+      mode = 'n',
       {
         { '[d', '<leader>d[' },
         function() MiniBracketed.diagnostic('backward') end,
@@ -71,6 +113,20 @@ return {
         'Next diagnostic'
       },
       {
+        { '[D', '<leader>d{' },
+        function() MiniBracketed.diagnostic('first') end,
+        'First diagnostic'
+      },
+      {
+        { ']D', '<leader>d}' },
+        function() MiniBracketed.diagnostic('last') end,
+        'Last diagnostic'
+      }
+    })
+
+    useMap.batch({
+      mode = 'n',
+      {
         { '[i', '<leader>i[' },
         function() MiniBracketed.indent('backward', { change_type = 'diff' }) end,
         'Previous indent scope'
@@ -80,6 +136,20 @@ return {
         function() MiniBracketed.indent('forward', { change_type = 'diff' }) end,
         'Next indent scope'
       },
+      {
+        { '[I', '<leader>i{' },
+        function() MiniBracketed.indent('first', { change_type = 'diff' }) end,
+        'First indent scope'
+      },
+      {
+        { ']I', '<leader>i}' },
+        function() MiniBracketed.indent('last', { change_type = 'diff' }) end,
+        'Last indent scope'
+      }
+    })
+
+    useMap.batch({
+      mode = 'n',
       {
         { '[l', '<leader>l[' },
         function() MiniBracketed.location('backward') end,
@@ -91,6 +161,20 @@ return {
         'Next location'
       },
       {
+        { '[L', '<leader>l{' },
+        function() MiniBracketed.location('first') end,
+        'First location'
+      },
+      {
+        { ']L', '<leader>l}' },
+        function() MiniBracketed.location('last') end,
+        'Last location'
+      }
+    })
+
+    useMap.batch({
+      mode = 'n',
+      {
         { '[u', '<leader>u[' },
         function() MiniBracketed.undo('backward') end,
         'Previous undo state'
@@ -101,6 +185,20 @@ return {
         'Next undo state'
       },
       {
+        { '[U', '<leader>u{' },
+        function() MiniBracketed.undo('first') end,
+        'First undo state'
+      },
+      {
+        { ']U', '<leader>u}' },
+        function() MiniBracketed.undo('last') end,
+        'Last undo state'
+      }
+    })
+
+    useMap.batch({
+      mode = 'n',
+      {
         { '[y', '<leader>y[' },
         function() MiniBracketed.yank('backward') end,
         'Previous yank',
@@ -110,6 +208,16 @@ return {
         function() MiniBracketed.yank('forward') end,
         'Next yank',
       },
+      {
+        { '[Y', '<leader>y{' },
+        function() MiniBracketed.yank('first') end,
+        'First yank',
+      },
+      {
+        { ']Y', '<leader>y}' },
+        function() MiniBracketed.yank('last') end,
+        'Last yank',
+      }
     })
 
     MiniBracketed.setup(opts)

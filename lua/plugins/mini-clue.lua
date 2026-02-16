@@ -66,11 +66,53 @@ return {
         MiniClue.gen_clues.windows(),
         MiniClue.gen_clues.z(),
 
-        { mode = 'n', keys = '<leader>b[', postkeys = '<leader>b' },
-        { mode = 'n', keys = ']w', postkeys = ']' },
+        function()
+          local brackets = {
+            '[', ']', '{', '}'
+          }
 
-        { mode = 'n', keys = '[b', postkeys = '[' },
-        { mode = 'n', keys = '[w', postkeys = '[' },
+          local bracket_objs = {
+            'b',
+          }
+
+          local bracket_clues = {}
+
+          for _, obj in pairs(bracket_objs) do
+            for _, bracket in pairs(brackets) do
+              local postkeys = '<leader>' .. obj
+              bracket_clues[#bracket_clues + 1] = {
+                mode = 'n',
+                keys = postkeys .. bracket,
+                postkeys = postkeys,
+              }
+            end
+          end
+
+          return bracket_clues
+        end,
+
+        function()
+          local brackets = {
+            '[', ']'
+          }
+
+          local bracket_objs = {
+            'b',
+            'B'
+          }
+
+          local bracket_clues = {}
+
+          for _, obj in pairs(bracket_objs) do
+            for _, bracket in pairs(brackets) do
+              bracket_clues[#bracket_clues + 1] = {
+                mode = 'n',
+                keys = bracket .. obj,
+                postkeys = bracket,
+              }
+            end
+          end
+        end
       },
     })
   end,
