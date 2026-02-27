@@ -22,7 +22,8 @@ return {
   version = false,
   event = 'VeryLazy',
   opts = {
-    indentscope = { suffix = '' },
+    indent = { suffix = '' },
+    file = { suffix = '' },
   },
   config = function(_, opts)
     local MiniBracketed = require('mini.bracketed')
@@ -169,6 +170,30 @@ return {
         { ']L', '<leader>l}' },
         function() MiniBracketed.location('last') end,
         'Last location'
+      }
+    })
+
+    useMap.batch({
+      mode = 'n',
+      {
+        { '[q', '<leader>q[' },
+        function() MiniBracketed.quickfix('backward') end,
+        'Previous quickfix'
+      },
+      {
+        { ']q', '<leader>q]' },
+        function() MiniBracketed.quickfix('forward') end,
+        'Next quickfix'
+      },
+      {
+        { '[Q', '<leader>q{' },
+        function() MiniBracketed.quickfix('first') end,
+        'First quickfix'
+      },
+      {
+        { ']Q', '<leader>q}' },
+        function() MiniBracketed.quickfix('last') end,
+        'Last quickfix'
       }
     })
 

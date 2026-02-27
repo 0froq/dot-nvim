@@ -9,7 +9,7 @@ return {
     IncRename.setup(opts)
 
     useMap.nmap(
-      '<leader>xr',
+      '<leader>cr',
       {
         neovim = ':IncRename ',
         vscode = 'editor.action.rename',

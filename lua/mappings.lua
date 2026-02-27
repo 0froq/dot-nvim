@@ -39,7 +39,3 @@ if not vim.g.vscode then
   -- map('n', '<leader>dk', duck.cook, "Cook!")
   -- map('n', '<leader>da', duck.cook_all, "Cook 'em all!")
 end
--- ~/.config/nvim/init.lua
-useMap.nmap('<leader>e', function()
-  require('oq.tree-edit'):toggle()
-end, { desc = 'Tree file manager' })

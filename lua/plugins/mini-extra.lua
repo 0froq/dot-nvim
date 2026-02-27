@@ -5,124 +5,183 @@ return {
   config = function(_, opts)
     local MiniExtra = require('mini.extra')
 
-    local map = require('utils').map
-    local vscode_action = require('utils').vscode_action
-    local vscode_call = require('utils').vscode_call
+    -- local map = require('utils').map
+    -- local vscode_action = require('utils').vscode_action
+    -- local vscode_call = require('utils').vscode_call
+    local useMap = require('useMap')
 
     MiniExtra.setup(opts)
+
     -- LSP mappings
-    map('n', 'gD', vscode_action(
-      function()
-        MiniExtra.pickers.lsp({ scope = 'declaration' })
-      end,
-      'editor.action.peekDeclaration'
-    ), 'Goto declaration')
+    useMap.batch({
+      mode = 'n',
+      {
+        'gD',
+        {
+          neovim = function()
+            MiniExtra.pickers.lsp({ scope = 'declaration' })
+          end,
+          vscode = 'editor.action.peekDeclaration'
+        },
+        'Goto declaration'
+      },
+      {
+        'gd',
+        {
+          neovim = function()
+            MiniExtra.pickers.lsp({ scope = 'definition' })
+          end,
+          vscode = 'editor.action.peekDefinition'
+        },
+        'Goto definition'
+      },
+      {
+        'gi',
+        {
+          neovim = function()
+            MiniExtra.pickers.lsp({ scope = 'implementation' })
+          end,
+          vscode = 'editor.action.peekImplementation'
+        },
+        'Goto implementation'
+      },
+      {
+        'gr',
+        {
+          neovim = function()
+            MiniExtra.pickers.lsp({ scope = 'references' })
+          end,
+          vscode = 'editor.action.referenceSearch.trigger'
+        },
+        'Goto reference'
+      },
+      {
+        'gt',
+        {
+          neovim = function()
+            MiniExtra.pickers.lsp({ scope = 'type_definition' })
+          end,
+          vscode = 'editor.action.peekTypeDefinition'
+        },
+        'Goto type definition'
+      },
+      {
+        'gs',
+        {
+          neovim = function()
+            MiniExtra.pickers.lsp({ scope = 'document_symbol' })
+          end,
+        },
+        'Goto document symbol'
+      },
+    })
 
-    map('n', 'gd', vscode_action(
-      function()
-        MiniExtra.pickers.lsp({ scope = 'definition' })
-      end,
-      'editor.action.peekDefinition'
-    ), 'Goto definition')
+    -- Keymaps
+    useMap.nmap(
+      '<leader>fk',
+      { neovim = MiniExtra.pickers.keymaps, },
+      'Pick keymaps'
+    )
 
-    map('n', 'gi', vscode_call(
-      function()
-        MiniExtra.pickers.lsp({ scope = 'implementation' })
-      end,
-      'editor.action.peekImplementation'
-    ), 'Goto implementation')
+    useMap.nmap(
+      '<leader>dd',
+      {
+        neovim = function()
+          local diagnostics = vim.diagnostic.get(vim.api.nvim_get_current_buf(),
+            { lnum = vim.api.nvim_win_get_cursor(0)[1] - 1 })
+          if vim.tbl_isempty(diagnostics) then
+            MiniExtra.pickers.diagnostic({ scope = 'current' })
+          else
+            vim.diagnostic.open_float(nil, { border = 'single' })
+          end
+        end,
+        vscode = 'workbench.panel.markers.view.focus'
+      },
+      'Pick diagnostics'
+    )
 
-    map('n', 'gr', vscode_action(
-      function()
-        MiniExtra.pickers.lsp({ scope = 'references' })
-      end,
-      'editor.action.referenceSearch.trigger'
-    ), 'Goto reference')
+    -- Git mappings
+    useMap.batch({
+      mode = 'n',
+      {
+        '<leader>fgc',
+        {
+          neovim = function()
+            MiniExtra.pickers.git_commits()
+          end,
+          vscode = 'workbench.scm.history.focus'
+        },
+        'Pick git commits'
+      },
+      {
+        '<leader>fgh',
+        {
+          neovim = function()
+            MiniExtra.pickers.git_hunks()
+          end,
+          vscode = ''
+        },
+        'Pick git hunks'
+      },
+    })
 
-    map('n', 'gt', vscode_action(
-      function()
-        MiniExtra.pickers.lsp({ scope = 'type_definition' })
-      end,
-      'editor.action.peekTypeDefinition'
-    ), 'Goto type definition')
+    -- Highlight groups
+    useMap.nmap(
+      '<leader>fH',
+      {
+        neovim = MiniExtra.pickers.hl_groups,
+      },
+      'Pick highlight groups'
+    )
 
-    map('n', 'gs', vscode_action(
-      function()
-        MiniExtra.pickers.lsp({ scope = 'document_symbol' })
-      end,
-      ''
-    ), 'Goto document symbol')
+    -- Colorschemes
+    useMap.nmap(
+      '<leader>fc',
+      {
+        neovim = MiniExtra.pickers.colorschemes,
+      },
+      'Pick colorscheme'
+    )
 
-    -- map('n', 'gS', vscode_action(
-    --   function()
-    --     MiniExtra.pickers.lsp({ scope = 'workspace_symbol' })
-    --   end,
-    --   ''
-    -- ), 'Goto workspace symbol')
+    -- Marks
+    useMap.nmap(
+      '<leader>fm',
+      {
+        neovim = MiniExtra.pickers.marks,
+      },
+      'Pick marks'
+    )
 
-    -- Other pickers
-    map('n', '<leader>fk', vscode_action(
-      MiniExtra.pickers.keymaps,
-      ''
-    ), 'Pick keymaps')
+    -- Location and jump lists
+    useMap.batch({
+      mode = 'n',
+      {
+        '<leader>fl',
+        {
+          neovim = function()
+            MiniExtra.pickers.list({ scope = 'location' })
+          end,
+        },
+        'Pick locations'
+      },
+      {
+        '<leader>fj',
+        {
+          neovim = function()
+            MiniExtra.pickers.list({ scope = 'jump' })
+          end,
+        },
+        'Pick jumps'
+      },
+    })
 
-    -- If no diagnostics at cursor, open all diagnostics
-    -- else open float for current diagnostics
-    map('n', '<leader>dd', vscode_action(
-      function()
-        local diagnostics = vim.diagnostic.get(vim.api.nvim_get_current_buf(), { lnum = vim.api.nvim_win_get_cursor(0)[1] - 1 })
-        if vim.tbl_isempty(diagnostics) then
-          MiniExtra.pickers.diagnostic({ scope = 'current' })
-        else
-          vim.diagnostic.open_float(nil, { border = 'single' })
-        end
-      end,
-      'workbench.panel.markers.view.focus'
-    ), 'Pick diagnostics')
-
-    map('n', '<leader>fgc', vscode_action(
-      function()
-        MiniExtra.pickers.git_commits()
-      end,
-      'workbench.scm.history.focus'
-    ), 'Pick git commits')
-
-    map('n', '<leader>fgh', vscode_action(
-      function()
-        MiniExtra.pickers.git_hunks()
-      end,
-      ''
-    ), 'Pick git hunks')
-
-    map('n', '<leader>fH', vscode_action(
-      function()
-        MiniExtra.pickers.hl_groups()
-      end,
-      ''
-    ), 'Pick highlight groups')
-    map('n', '<leader>fc', vscode_action(
-      function()
-        MiniExtra.pickers.colorschemes()
-      end,
-      ''
-    ), 'Pick colorscheme')
-    map('n', '<leader>fm', vscode_action(
-      function()
-        MiniExtra.pickers.marks()
-      end,
-      ''
-    ), 'Pick marks')
-    map('n', '<leader>fl', vscode_action(
-      function()
-        MiniExtra.pickers.list({ scope = 'location' })
-      end,
-      ''
-    ), 'Pick locations')
-    map('n', '<leader>fj', vscode_action(
-      function()
-        MiniExtra.pickers.list({ scope = 'jump' })
-      end,
-      ''
-    ), 'Pick jumps')
+    -- Visits
+    useMap.nmap(
+      '<leader>vv',
+      {
+        neovim = MiniExtra.pickers.visit_paths,
+      },
+      'Pick visits paths'
+    )
   end,
 }

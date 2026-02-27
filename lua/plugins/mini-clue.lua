@@ -73,6 +73,17 @@ return {
 
           local bracket_objs = {
             'b',
+            'c',
+            'd',
+            'h',
+            'i',
+            'j',
+            'l',
+            'm',
+            'x',
+            'y',
+            'u',
+            'q'
           }
 
           local bracket_clues = {}
@@ -98,7 +109,29 @@ return {
 
           local bracket_objs = {
             'b',
-            'B'
+            'B',
+            'c',
+            'C',
+            'd',
+            'D',
+            'h',
+            'H',
+            'i',
+            'I',
+            'j',
+            'J',
+            'l',
+            'L',
+            'm',
+            'M',
+            'x',
+            'X',
+            'y',
+            'Y',
+            'u',
+            'U',
+            'q',
+            'Q'
           }
 
           local bracket_clues = {}
