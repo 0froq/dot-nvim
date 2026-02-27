@@ -40,4 +40,4 @@ vim.schedule(function()
   require 'mappings'
 end)
 
-vim.cmd [[colorscheme oq]]
+vim.cmd [[colorscheme lig]]

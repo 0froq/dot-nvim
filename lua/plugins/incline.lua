@@ -11,7 +11,7 @@ return {
       margin = { vertical = 0, horizontal = 0 },
     },
     render = function(props)
-      local palette = require('oq.colors').setup()
+      local palette = require('lig.colors').setup()
       local mini_icons = require('mini.icons')
 
       local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':t') or '[-]'
