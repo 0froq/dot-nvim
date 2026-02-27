@@ -22,21 +22,21 @@ return {
     useMap.batch({
       mode = 'n',
       {
-        '<leader><leader>',
+        '<leader>fb',
         {
           neovim = MiniPick.builtin.buffers,
           vscode = 'workbench.action.showAllEditors',
         },
         'Pick buffers',
       },
-      {
-        '<leader>ff',
-        {
-          neovim = MiniPick.builtin.files,
-          vscode = 'workbench.action.quickOpen',
-        },
-        'Pick files',
-      },
+      -- {
+      --   '<leader>ff',
+      --   {
+      --     neovim = MiniPick.builtin.files,
+      --     vscode = 'workbench.action.quickOpen',
+      --   },
+      --   'Pick files',
+      -- },
       {
         '<leader>fw',
         {
