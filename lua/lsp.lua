@@ -1,18 +1,18 @@
 -- A custom capabilities setup for Neovim LSP servers
--- local capabilities = require('mini.completion').get_lsp_capabilities()
-local capabilities
-if not vim.g.vscode then
-  capabilities = require('blink.cmp').get_lsp_capabilities({
-    textDocument = {
-      foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true
-      }
-    }
-  })
-else
-  capabilities = vim.lsp.protocol.make_client_capabilities()
-end
+local capabilities = require('mini.completion').get_lsp_capabilities()
+-- local capabilities
+-- if not vim.g.vscode then
+--   capabilities = require('blink.cmp').get_lsp_capabilities({
+--     textDocument = {
+--       foldingRange = {
+--         dynamicRegistration = false,
+--         lineFoldingOnly = true
+--       }
+--     }
+--   })
+-- else
+--   capabilities = vim.lsp.protocol.make_client_capabilities()
+-- end
 
 -- Enhanced capabilities for better completion and other features
 capabilities.textDocument.completion.completionItem.snippetSupport = true

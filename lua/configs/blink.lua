@@ -20,6 +20,13 @@ require('blink.cmp').setup {
         module = 'blink-copilot',
         score_offset = 100,
         async = true,
+        transform_items = function(ctx, items)
+          for _, item in ipairs(items) do
+            item.kind_icon = ''
+            item.kind_name = 'Copilot'
+          end
+          return items
+        end
       },
     },
   },
@@ -66,15 +73,15 @@ require('blink.cmp').setup {
       direction_priority = { 'n', 's' },
       border = 'single',
       draw = {
-        columns = { { 'kind_icon' }, { 'label', gap = 1 } },
+        columns = { { 'kind_icon' }, { 'label', gap = 1 }, { 'kind' } },
         components = {
           label = {
             text = function(ctx)
               return require('colorful-menu').blink_components_text(ctx)
             end,
-            highlight = function(ctx)
-              return require('colorful-menu').blink_components_highlight(ctx)
-            end,
+            -- highlight = function(ctx)
+            --   return require('colorful-menu').blink_components_highlight(ctx)
+            -- end,
           },
         },
       },
