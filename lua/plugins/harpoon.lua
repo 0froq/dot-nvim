@@ -1,4 +1,3 @@
-local useMap = require('useMap')
 if vim.g.vscode then
   return {}
 end
@@ -11,8 +10,9 @@ return {
     local harpoon = require('harpoon')
     local harpoon_extensions = require('harpoon.extensions')
 
-    harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
+    local useMap = require('useMap')
 
+    harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
 
     harpoon:setup()
 
@@ -38,14 +38,14 @@ return {
         end,
         'Harpoon buffer',
       },
-      -- {
-      --   -- Show harpoon list
-      --   '<leader><leader>',
-      --   function()
-      --     harpoon.ui:toggle_quick_menu(harpoon:list())
-      --   end,
-      --   'Harpoon list',
-      -- }
+      {
+        -- Show harpoon list
+        '<leader><leader><leader>',
+        function()
+          harpoon.ui:toggle_quick_menu(harpoon:list())
+        end,
+        'Harpoon list',
+      }
     })
 
     -- basic telescope configuration
