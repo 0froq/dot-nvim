@@ -3,14 +3,32 @@ require('blink.cmp').setup {
     implementation = 'prefer_rust'
   },
   sources = {
-    default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer', 'references', 'copilot' },
+    default = {
+      'lazydev',
+      'lsp',
+      'path',
+      'snippets',
+      'buffer',
+      'references',
+      'copilot',
+      'avante',
+    },
     providers = {
+      avante = {
+        module = 'blink-cmp-avante',
+        name = 'Avante',
+        opts = {
+          -- options for blink-cmp-avante
+        }
+      },
       lazydev = {
         name = 'LazyDev',
         module = 'lazydev.integrations.blink',
         score_offset = 100,
       },
-      snippets = { score_offset = 1000 },
+      snippets = {
+        score_offset = 1000
+      },
       references = {
         name = 'pandoc_references',
         module = 'blink.compat.source',
@@ -73,15 +91,12 @@ require('blink.cmp').setup {
       direction_priority = { 'n', 's' },
       border = 'single',
       draw = {
-        columns = { { 'kind_icon' }, { 'label', gap = 1 }, { 'kind' } },
+        columns = { { 'label', gap = 1 }, { 'kind' } },
         components = {
           label = {
             text = function(ctx)
               return require('colorful-menu').blink_components_text(ctx)
             end,
-            -- highlight = function(ctx)
-            --   return require('colorful-menu').blink_components_highlight(ctx)
-            -- end,
           },
         },
       },
@@ -93,7 +108,6 @@ require('blink.cmp').setup {
     },
   },
   keymap = {
-    -- %keymap
     preset = 'none',
     ['<C-n>'] = { 'show', 'fallback' },
     ['<CR>'] = { 'accept', 'fallback' },
@@ -101,8 +115,5 @@ require('blink.cmp').setup {
     ['<tab>'] = { 'snippet_forward', 'fallback' },
     ['<Up>'] = { 'select_prev', 'fallback' },
     ['<Down>'] = { 'select_next', 'fallback' },
-    -- ['<leader><leader>'] = { 'show', 'fallback' }
-
-    -- ['<leader><leader>'] = { function(cmp) cmp.show({ providers = { 'snippets' } }) end }
   },
 }

@@ -40,8 +40,6 @@ return {
       }
     })
 
-    MiniSnippets.start_lsp_server({ triggers = { '..' } })
-
     local make_stop = function()
       local au_opts = { pattern = '*:n', once = true }
       au_opts.callback = function()
