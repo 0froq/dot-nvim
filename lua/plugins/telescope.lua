@@ -183,5 +183,20 @@ return {
         'Diagnostics'
       },
     })
+
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'TelescopePrompt',
+      callback = function()
+        local actions = require('telescope.actions')
+        local action_state = require('telescope.actions.state')
+        useMap.imap('<C-a>', function()
+          local picker = action_state.get_current_picker(vim.api.nvim_get_current_buf())
+          if picker then
+            actions.send_to_qflist(picker.prompt_bufnr)
+            actions.open_qflist(picker.prompt_bufnr)
+          end
+        end, { buffer = true, desc = 'Send all Telescope results to Quickfix' })
+      end,
+    })
   end
 }

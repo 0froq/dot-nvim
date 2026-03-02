@@ -1,8 +1,10 @@
 -- Delete shit maps
 -- vim.keymap.del('n', 'gra')
 -- vim.keymap.del('n', 'gri')
-vim.keymap.del('n', 'grr')
+-- vim.keymap.del('n', 'grr')
 -- vim.keymap.del('n', 'grn')
+
+local useMap = require('useMap')
 
 useMap.nvmap({ 'j', '<Down>' }, 'gj', 'Down')
 useMap.nvmap({ 'k', '<Up>' }, 'gk', 'Up')

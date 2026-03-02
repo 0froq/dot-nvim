@@ -113,39 +113,25 @@ vim.api.nvim_create_autocmd('ExitPre', {
   end
 })
 
--- vim.api.nvim_create_autocmd('User', {
---   pattern = 'BlinkCmpMenuOpen',
---   callback = function()
---     require('copilot.suggestion').dismiss()
---     vim.b.copilot_suggestion_hidden = true
---   end,
--- })
---
--- vim.api.nvim_create_autocmd('User', {
---   pattern = 'BlinkCmpMenuClose',
---   callback = function()
---     vim.b.copilot_suggestion_hidden = false
---   end,
--- })
--- -- Limit buffer history to 5 buffers
--- vim.api.nvim_create_autocmd('BufAdd', {
---   callback = function()
---     -- Only count file buffers
---     local buflist = {}
---     for _, buf in ipairs(vim.fn.getbufinfo({ buflisted = 1 })) do
---       if vim.bo[buf.bufnr].buftype == '' then
---         table.insert(buflist, { bufnr = buf.bufnr, lastused = buf.lastused })
---       end
---     end
---     if #buflist > 5 then
---       -- Sort buffers by last used time
---       table.sort(buflist, function(a, b)
---         return a.lastused < b.lastused
---       end)
---       -- Delete the oldest buffers
---       for i = 1, #buflist - 5 do
---         vim.api.nvim_buf_delete(buflist[i].bufnr, { force = true })
---       end
---     end
---   end
--- })
+vim.api.nvim_create_augroup('QfRight', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'QfRight',
+  pattern = 'qf',
+  callback = function()
+    vim.cmd('wincmd L')
+    vim.cmd('vertical resize 60')
+  end,
+})
+
+vim.api.nvim_create_augroup('HelpRight', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'HelpRight',
+  pattern = 'help',
+  callback = function()
+    vim.cmd('wincmd L')
+    vim.cmd('vertical resize 80')
+    vim.wo.number = false
+    vim.wo.relativenumber = false
+  end,
+})
+

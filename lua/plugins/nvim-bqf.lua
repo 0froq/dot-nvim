@@ -1,5 +1,11 @@
 return {
   'kevinhwang91/nvim-bqf',
   lazy = false,
-  opts = {}
+  opts = function()
+    return {
+      preview = {
+        border = { '┌', '─', '┐', '│', '┘', '─', '└', '│' },
+      },
+    }
+  end
 }
