@@ -6,22 +6,60 @@ return {
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   },
   lazy = false,
-  opts = function(opts)
+  opts = function()
     local layout_actions = require('telescope.actions.layout')
-    local borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' }
+    local borderchars    = { '─', '│', '─', '│', '┌', '┐', '┘', '└' }
+
+    -- TODO: Ugly, refactor this!
+    local entry_display  = require('telescope.pickers.entry_display')
+    local MiniIcons      = require('mini.icons')
+    MiniIcons.mock_nvim_web_devicons()
+
+    local function global_display_override(e, opts)
+      local path = e.path or e.filename or e.value
+      if not path or type(path) ~= 'string' then
+        return nil
+      end
+
+      local icon, icon_hl = MiniIcons.get('file', path)
+
+      local displayer = entry_display.create({
+        separator = ' ',
+        items = {
+          { width = 2 },
+          { remaining = true },
+        },
+      })
+
+      local orig = rawget(e, 'display')
+      local orig_display = orig
+      if type(orig) == 'function' then
+        orig_display = orig(e)
+      end
+
+      local function display_fn(entry)
+        local text = orig_display
+        if type(orig) == 'function' then
+          text = orig(entry)
+        end
+        return displayer({
+          { icon, icon_hl },
+          { text, nil },
+        })
+      end
+
+      return display_fn, true
+    end
 
     return {
       defaults = {
+        entry_index = {
+          display = global_display_override,
+        },
         borderchars = {
-          -- prompt = { '', '', '', '', '', '', '', '' },
-          -- results = { '', '', '', '', '', '', '', '' },
-          -- preview = { '', '', '', '', '', '', '', '' },
           prompt  = borderchars,
           results = borderchars,
           preview = borderchars,
-          -- prompt  = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
-          -- results = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
-          -- preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
         },
         layout_strategy = 'vertical',
         layout_config = {
