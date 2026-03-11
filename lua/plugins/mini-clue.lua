@@ -1,15 +1,15 @@
 if vim.g.vscode then
   return {}
 end
+
 return {
   'nvim-mini/mini.clue',
   version = false,
-  lazy = false,
-  opts = {},
-  config = function(_, opts)
+  event = 'VeryLazy',
+  opts = function()
     local MiniClue = require('mini.clue')
 
-    MiniClue.setup({
+    return {
       window = {
         -- Show window immediately
         delay = 0,
@@ -65,6 +65,24 @@ return {
         MiniClue.gen_clues.registers(),
         MiniClue.gen_clues.windows(),
         MiniClue.gen_clues.z(),
+
+        function()
+          local directions = {
+            'H', 'J', 'K', 'L'
+          }
+
+          local clues = {}
+
+          for _, direction in pairs(directions) do
+            clues[#clues + 1] = {
+              mode = 'n',
+              keys = 'g' .. direction,
+              postkeys = 'g'
+            }
+          end
+
+          return clues
+        end,
 
         function()
           local brackets = {
@@ -147,6 +165,6 @@ return {
           end
         end
       },
-    })
+    }
   end,
 }

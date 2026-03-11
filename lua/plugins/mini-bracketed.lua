@@ -1,22 +1,7 @@
-local useMap = require('useMap')
-
 if vim.g.vscode then
-  useMap.batch({
-    mode = 'n',
-    {
-      '[b',
-      { vscode = 'workbench.action.previousEditorInGroup', },
-      'Previous buffer'
-    },
-    {
-      ']b',
-      { vscode = 'workbench.action.nextEditorInGroup', },
-      'Next buffer'
-    },
-  })
-
   return {}
 end
+
 return {
   'nvim-mini/mini.bracketed',
   version = false,
@@ -28,7 +13,8 @@ return {
   config = function(_, opts)
     local MiniBracketed = require('mini.bracketed')
 
-    -- Buffer navigation
+    local useMap = require('useMap')
+
     useMap.batch({
       mode = 'n',
       {
@@ -180,21 +166,6 @@ return {
         function() MiniBracketed.quickfix('backward') end,
         'Previous quickfix'
       },
-      {
-        { ']q', '<leader>q]' },
-        function() MiniBracketed.quickfix('forward') end,
-        'Next quickfix'
-      },
-      {
-        { '[Q', '<leader>q{' },
-        function() MiniBracketed.quickfix('first') end,
-        'First quickfix'
-      },
-      {
-        { ']Q', '<leader>q}' },
-        function() MiniBracketed.quickfix('last') end,
-        'Last quickfix'
-      }
     })
 
     useMap.batch({

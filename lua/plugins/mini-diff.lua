@@ -1,14 +1,15 @@
 if vim.g.vscode then
   return {}
 end
+
 return {
   'nvim-mini/mini.diff',
   version = false,
-  lazy = false,
-  config = function()
+  event = 'BufReadPre',
+  opts = function()
     local MiniDiff = require('mini.diff')
 
-    MiniDiff.setup({
+    return {
       view = {
         style = 'sign',
         signs = {
@@ -17,11 +18,16 @@ return {
           delete = '',
         },
       },
-      -- mappings = {
-      --   apply = "<leader>hs",
-      --   textobject = "h"
-      -- },
+      mappings = {
+        apply = '',
+        reset = '',
+        textobject = '',
+        goto_first = '',
+        goto_prev = '',
+        goto_next = '',
+        goto_last = '',
+      },
       source = MiniDiff.gen_source.save(),
-    })
+    }
   end,
 }

@@ -1,7 +1,7 @@
 return {
   'nvim-mini/mini.jump2d',
   version = false,
-  lazy = false,
+  event = 'VeryLazy',
   opts = {
     labels = 'abcdefghijklmnopqrstuvwxyz',
     view = {
@@ -19,21 +19,15 @@ return {
   config = function(_, opts)
     local MiniJump2d = require('mini.jump2d')
 
-    local map = require('utils').map
+    local useMap = require('useMap')
 
     MiniJump2d.setup(opts)
 
-    map('n', 'ss', function()
+    useMap.nmap('ss', function()
       MiniJump2d.start(MiniJump2d.builtin_opts.single_character)
     end, { desc = 'Jump char' })
-    map('n', '<cr>', function()
+    useMap.nmap('<cr>', function()
       MiniJump2d.start(MiniJump2d.builtin_opts.line_start)
     end, { desc = 'Jump lines', noremap = true, silent = true })
-
-    -- vim.keymap.del("n", "<c-m>")
-    -- vim.keymap.del("n", "gri")
-    -- vim.keymap.del("n", "grr")
-    -- vim.keymap.del("n", "grn")
-
   end,
 }

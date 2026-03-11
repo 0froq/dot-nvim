@@ -1,26 +1,17 @@
 return {
-  "nvim-mini/mini.move",
+  'nvim-mini/mini.move',
   version = false,
-  lazy = false,
+  event = 'VeryLazy',
   opts = {
     mappings = {
-      left = "<",
-      right = ">",
-      down = "J",
-      up = "K",
-      line_left = "g<",
-      line_right = "g>",
-      line_down = "gJ",
-      line_up = "gK",
+      left = 'H',
+      right = 'L',
+      down = 'J',
+      up = 'K',
+      line_left = 'gH',
+      line_right = 'gL',
+      line_down = 'gJ',
+      line_up = 'gK',
     }
   },
-  config = function(_, opts)
-
-    local MiniMove = require("mini.move")
-
-    local map = require("utils").map
-    local vscode_action = require("utils").vscode_action
-
-    MiniMove.setup(opts)
-  end
 }
