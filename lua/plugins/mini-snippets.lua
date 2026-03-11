@@ -1,19 +1,16 @@
 return {
   'nvim-mini/mini.snippets',
   version = false,
-  lazy = false,
   event = { 'BufReadPost', 'BufNewFile' },
-  config = function()
+  opts = function()
     local MiniSnippets = require('mini.snippets')
-    local map = require('utils').map
 
     local match_strict = function(snips)
       -- Do not match with whitespace to cursor's left
       return MiniSnippets.default_match(snips, { pattern_fuzzy = '%S+' })
     end
 
-
-    MiniSnippets.setup({
+    return {
       snippets = {
         -- gen_loader.from_runtime({})
         -- function(context)
@@ -38,7 +35,12 @@ return {
       expand = {
         match = match_strict
       }
-    })
+    }
+  end,
+  config = function(_, opts)
+    local MiniSnippets = require('mini.snippets')
+
+    MiniSnippets.setup(opts)
 
     local make_stop = function()
       local au_opts = { pattern = '*:n', once = true }
