@@ -1,7 +1,7 @@
 -- Delete shit maps
 -- vim.keymap.del('n', 'gra')
 -- vim.keymap.del('n', 'gri')
--- vim.keymap.del('n', 'grr')
+vim.keymap.del('n', 'grr')
 -- vim.keymap.del('n', 'grn')
 
 local useMap = require('useMap')

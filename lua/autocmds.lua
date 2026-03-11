@@ -1,16 +1,17 @@
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
+local M = {}
 
 local function augroup(name)
   return vim.api.nvim_create_augroup('lazyvim_' .. name, { clear = true })
 end
 
+M.augroup = augroup
+
 -- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd('TextYankPost', {
+vim.api.nvim_create_autocmd({ 'TextYankPost' }, {
+  group = augroup 'highlight-yank',
   desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,
@@ -18,31 +19,17 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Restore cursor position
 vim.api.nvim_create_autocmd({ 'BufReadPost' }, {
-  pattern = { '*' },
+  group = augroup 'restore-cursor',
+  desc = 'Restore cursor position',
   callback = function()
     vim.api.nvim_exec2('silent! normal! g`"zv', { output = false })
   end,
 })
 
 -- Big file
---vim.filetype.add {
---  pattern = {
---    [".*"] = {
---      function(path, buf)
---        if vim.bo[buf].filetype ~= "bigfile" and path and vim.fn.getfsize(path) > vim.g.bigfile_size then
---          vim.opt.cursorline = false
---          return "bigfile"
---        else
---          return nil
---        end
---      end,
---    },
---  },
--- }
-
 vim.api.nvim_create_autocmd({ 'FileType' }, {
   group = augroup 'bigfile',
-  pattern = 'bigfile',
+  pattern = { 'bigfile' },
   callback = function(ev)
     vim.b.minianimate_disable = true
     vim.schedule(function()
@@ -51,20 +38,18 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
   end,
 })
 
-vim.api.nvim_create_autocmd('TermOpen', {
-  pattern = '*',
+vim.api.nvim_create_autocmd({ 'TermOpen' }, {
+  group = augroup 'terminal',
   callback = function()
     vim.opt_local.number = false
     vim.opt_local.relativenumber = false
   end,
 })
 
-vim.api.nvim_create_augroup('IrreplaceableWindows', { clear = true })
-vim.api.nvim_create_autocmd('BufWinEnter', {
-  group = 'IrreplaceableWindows',
-  pattern = '*',
+vim.api.nvim_create_autocmd({ 'BufWinEnter' }, {
+  group = augroup 'irreplaceabel-windows',
   callback = function()
-    local filetypes = { 'OverseerList', 'neo-tree' }
+    local filetypes = { 'OverseerList' }
     local buftypes = { 'nofile', 'terminal' }
     if vim.tbl_contains(buftypes, vim.bo.buftype) and vim.tbl_contains(filetypes, vim.bo.filetype) then
       vim.cmd 'set winfixbuf'
@@ -72,37 +57,16 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
   end,
 })
 
-vim.api.nvim_create_autocmd('ExitPre', {
-  group = vim.api.nvim_create_augroup('Exit', { clear = true }),
+vim.api.nvim_create_autocmd({ 'ExitPre' }, {
+  group = augroup 'exit',
   command = 'set guicursor=a:ver90',
-  desc = 'Set cursor back to beam when leaving Neovim.',
 })
-
-vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = '*',
-  callback = function(args)
-    require('conform').format({ bufnr = args.buf })
-  end,
-})
-
--- vim.api.nvim_create_autocmd("BufWritePre", {
---       callback = function(args)
---         vim.lsp.buf.code_action({
---           context = {
---             only = { "source.fixAll.eslint" },
---             bufnr = args.buf,
---             diagnostics = vim.lsp.diagnostic.get_line_diagnostics(),
---           },
---           apply = true,
---         })
---       end,
---     })
-
 
 -- When leave, write a session
-vim.api.nvim_create_autocmd('ExitPre', {
-  -- If no files are open, don't write session
-  callback = function(_)
+vim.api.nvim_create_autocmd({ 'ExitPre' }, {
+  group = augroup 'session',
+  -- If no files is opened, don't write session
+  callback = function()
     if #vim.fn.getbufinfo({ buflisted = 1 }) == 0 then
       return
     end
@@ -113,9 +77,8 @@ vim.api.nvim_create_autocmd('ExitPre', {
   end
 })
 
-vim.api.nvim_create_augroup('QfRight', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'QfRight',
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  group = augroup 'qf-right',
   pattern = 'qf',
   callback = function()
     vim.cmd('wincmd L')
@@ -123,9 +86,8 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-vim.api.nvim_create_augroup('HelpRight', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'HelpRight',
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  group = augroup 'help-right',
   pattern = 'help',
   callback = function()
     vim.cmd('wincmd L')
@@ -135,3 +97,4 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+return M

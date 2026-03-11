@@ -1,6 +1,6 @@
 -- File Name: useMap.lua
--- Last Modified: 2026-01-22 10:27:31
--- Line Count: 310
+-- Last Modified: 2026-03-11 10:05:57
+-- Line Count: 308
 -- Git Status: unknown
 --
 -- Unified Keymap Mapper for Neovim + VSCode
@@ -281,8 +281,6 @@ M.batch = function(mappings)
 
       -- Array format
     else
-      local first = mapping[1]
-
       -- Detect if first element is a local mode
       if #mapping == 4 then
         -- Has local mode: { mode, key, func, opts }
