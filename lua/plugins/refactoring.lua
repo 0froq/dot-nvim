@@ -1,45 +1,45 @@
 return {
-  "ThePrimeagen/refactoring.nvim",
+  'ThePrimeagen/refactoring.nvim',
   dependencies = {
-    "nvim-lua/plenary.nvim",
-    "nvim-treesitter/nvim-treesitter",
+    'nvim-lua/plenary.nvim',
+    'nvim-treesitter/nvim-treesitter',
   },
-  lazy = false,
+  event = 'BufReadPre',
   opts = {
     prompt_func_return_type = {
-        go = true,
-        java = true,
+      go = true,
+      java = true,
 
-        cpp = true,
-        c = true,
-        h = true,
-        hpp = true,
-        cxx = true,
+      cpp = true,
+      c = true,
+      h = true,
+      hpp = true,
+      cxx = true,
     },
     prompt_func_param_type = {
-        go = true,
-        java = true,
+      go = true,
+      java = true,
 
-        cpp = true,
-        c = true,
-        h = true,
-        hpp = true,
-        cxx = true,
+      cpp = true,
+      c = true,
+      h = true,
+      hpp = true,
+      cxx = true,
     },
   },
   config = function(_, opts)
-    local Refactoring = require("refactoring")
+    local Refactoring = require('refactoring')
 
-    local map = require("utils").map
+    local useMap = require('useMap')
 
     Refactoring.setup(opts)
 
-    map("x", "<leader>re", ":Refactor extract ", "Extract")
-    map("x", "<leader>rF", ":Refactor extract_to_file ", "Extract to file")
-    map("x", "<leader>rv", ":Refactor extract_var ", "Extract variable")
-    map({ "n", "x" }, "<leader>iv", ":Refactor inline_var<cr>", "Inline variable")
-    map("n", "<leader>if", ":Refactor inline_func<cr>", "Inline function")
-    map("n", "<leader>rb", ":Refactor extract_block<cr>", "Extract block")
-    map("n", "<leader>rB", ":Refactor extract_block_to_file", "Extract block to file")
+    useMap.map('x', '<leader>re', ':Refactor extract ', 'Extract')
+    useMap.map('x', '<leader>rF', ':Refactor extract_to_file ', 'Extract to file')
+    useMap.map('x', '<leader>rv', ':Refactor extract_var ', 'Extract variable')
+    useMap.map({ 'n', 'x' }, '<leader>iv', ':Refactor inline_var<cr>', 'Inline variable')
+    useMap.map('n', '<leader>if', ':Refactor inline_func<cr>', 'Inline function')
+    useMap.map('n', '<leader>rb', ':Refactor extract_block<cr>', 'Extract block')
+    useMap.map('n', '<leader>rB', ':Refactor extract_block_to_file', 'Extract block to file')
   end,
 }
