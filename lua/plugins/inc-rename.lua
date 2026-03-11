@@ -1,9 +1,10 @@
-local useMap = require('useMap')
 return {
   'smjonas/inc-rename.nvim',
-  lazy = false,
+  event = { 'BufReadPost' },
   opts = {},
   config = function(_, opts)
+    local useMap = require('useMap')
+
     local IncRename = require('inc_rename')
 
     IncRename.setup(opts)

@@ -1,6 +1,6 @@
 return {
   'b0o/incline.nvim',
-  lazy = false,
+  event = { 'BufReadPost' },
   opts = {
     window = {
       placement = {

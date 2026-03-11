@@ -1,4 +1,3 @@
-local useMap = require('useMap')
 return {
   'attilarepka/header.nvim',
   event = 'VeryLazy',
@@ -18,6 +17,8 @@ return {
     -- author_from_git = true,
   },
   config = function(_, opts)
+    local useMap = require('useMap')
+
     local Header = require('header')
 
     Header.setup(opts)

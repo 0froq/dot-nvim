@@ -1,5 +1,11 @@
+if vim.g.vscode then
+  return {}
+end
+
 return {
   'Daydreamer-riri/catalog-lens.nvim',
-  lazy = false,
-  opts = {},
+  ft = { 'json' },
+  opts = function()
+    return {}
+  end,
 }

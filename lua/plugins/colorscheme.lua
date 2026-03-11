@@ -1,24 +1,4 @@
 return {
-  -- {
-  --   "catppuccin/nvim",
-  --   lazy = false,
-  --   name = "catppuccin",
-  --   priority = 1000,
-  --   config = function()
-  --     require("catppuccin").setup()
-  --     -- vim.cmd [[colorscheme catppuccin]]
-  --
-  --   end
-  -- },
-  -- {
-  --   "ellisonleao/gruvbox.nvim",
-  --   lazy = false,
-  --   priority = 1000,
-  --   opts = {
-  --     contrast = "hard",
-  --     background = { transparent = true },
-  --   },
-  -- },
   {
     '0froq/lig.nvim',
     dev = true,
@@ -28,7 +8,6 @@ return {
     opts = {
       style = 'dark',
       mono = {
-        -- enabled = true,
         enabled = false,
         keep = {
           keyword = true,
