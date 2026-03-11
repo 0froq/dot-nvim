@@ -2,42 +2,43 @@ return {
   'Fro-Q/headup.nvim',
   dev = true,
   dir = '/Users/oQ/2_areas/development/nvim_plugins/headup.nvim',
-  lazy = false,
-  config = function()
+  event = { 'BufReadPre', 'BufNewFile' },
+  opts = {
+    enabled = true,
+    silent = false,
+    time_format = '%Y-%m-%d %H:%M:%S',
+    max_lines = 20,
+    end_pattern = '^%s*$',             -- stop at first empty line
+    exclude_pattern = '*/archive/*',   -- skip archived notes
+    {
+      pattern = '*',
+      match_pattern = '.-[Ll]ast[%s_%-][Mm]odified:%s(.-)%s*$',
+      content = 'current_time',
+    },
+    {
+      pattern = '*',
+      match_pattern = '.-[Ll]ine[%s_%-][Cc]ount:%s(.-)%s*$',
+      content = 'line_count',
+    },
+    {
+      pattern = '*',
+      match_pattern = '.-[Ff]ile[%s_%-][Ss]ize:%s(.-)%s*$',
+      content = 'file_size',
+    },
+    {
+      pattern = '*',
+      match_pattern = '.-[Ff]ile[%s_%-][Pp]ath:%s(.-)%s*$',
+      content = 'file_path',
+    },
+    {
+      pattern = '*',
+      match_pattern = '.-[Ff]ile[%s_%-][Nn]ame:%s(.-)%s*$',
+      content = 'file_name',
+    },
+  },
+  config = function(_, opts)
     local Headup = require('headup')
 
-    Headup.setup({
-      enabled = true,
-      silent = false,
-      time_format = '%Y-%m-%d %H:%M:%S',
-      max_lines = 20,
-      end_pattern = '^%s*$',           -- stop at first empty line
-      exclude_pattern = '*/archive/*', -- skip archived notes
-      {
-        pattern = '*',
-        match_pattern = '.-[Ll]ast[%s_%-][Mm]odified:%s(.-)%s*$',
-        content = 'current_time',
-      },
-      {
-        pattern = '*',
-        match_pattern = '.-[Ll]ine[%s_%-][Cc]ount:%s(.-)%s*$',
-        content = 'line_count',
-      },
-      {
-        pattern = '*',
-        match_pattern = '.-[Ff]ile[%s_%-][Ss]ize:%s(.-)%s*$',
-        content = 'file_size',
-      },
-      {
-        pattern = '*',
-        match_pattern = '.-[Ff]ile[%s_%-][Pp]ath:%s(.-)%s*$',
-        content = 'file_path',
-      },
-      {
-        pattern = '*',
-        match_pattern = '.-[Ff]ile[%s_%-][Nn]ame:%s(.-)%s*$',
-        content = 'file_name',
-      },
-    })
+    Headup.setup(opts)
   end
 }

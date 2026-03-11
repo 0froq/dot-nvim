@@ -15,7 +15,7 @@ return {
     local MiniIcons      = require('mini.icons')
     MiniIcons.mock_nvim_web_devicons()
 
-    local function global_display_override(e, opts)
+    local function global_display_override(e)
       local path = e.path or e.filename or e.value
       if not path or type(path) ~= 'string' then
         return nil

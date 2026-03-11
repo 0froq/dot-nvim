@@ -1,21 +1,7 @@
-local useMap = require('useMap')
 if vim.g.vscode then
-  useMap.batch({
-    mode = 'n',
-    {
-      '[h',
-      { vscode = 'workbench.action.editor.previousChange' },
-      'Previous Hunk',
-    },
-    {
-      ']h',
-      { vscode = 'workbench.action.editor.nextChange' },
-      'Next Hunk',
-    },
-  })
-
   return {}
 end
+
 return {
   'lewis6991/gitsigns.nvim',
   event = { 'BufReadPre', 'BufNewFile' },
@@ -70,6 +56,8 @@ return {
 
   },
   config = function(_, opts)
+    local useMap = require('useMap')
+
     -- If not a git repo, don't load gitsigns
     if vim.fn.systemlist('git rev-parse --is-inside-work-tree')[1] ~= 'true' then
       return

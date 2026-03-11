@@ -14,7 +14,6 @@ return {
     { 'jc-doyle/cmp-pandoc-references' },
     { 'nvim-mini/mini.snippets' },
   },
-  config = function()
-    require 'configs.blink'
-  end,
+  opts = require 'configs.blink'
 }
+

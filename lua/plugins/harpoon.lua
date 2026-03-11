@@ -1,20 +1,21 @@
 if vim.g.vscode then
   return {}
 end
+
 return {
   'ThePrimeagen/harpoon',
   branch = 'harpoon2',
-  lazy = false,
+  event = { 'BufReadPre', 'BufNewFile' },
   dependencies = { 'nvim-lua/plenary.nvim' },
   config = function()
-    local harpoon = require('harpoon')
+    local Harpoon = require('harpoon')
     local harpoon_extensions = require('harpoon.extensions')
 
     local useMap = require('useMap')
 
-    harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
+    Harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
 
-    harpoon:setup()
+    Harpoon:setup()
 
     -- Harpoon mappings
     useMap.batch({
@@ -23,15 +24,15 @@ return {
         -- Toggle harpoon buffer
         '<leader>tt',
         function()
-          local marks = harpoon:list().items
+          local marks = Harpoon:list().items
           local current_file_path = vim.fn.expand('%:p:.')
           for _, item in ipairs(marks) do
             if item.value == current_file_path then
-              harpoon:list():remove()
+              Harpoon:list():remove()
               return
             end
           end
-          harpoon:list():add()
+          Harpoon:list():add()
 
           -- Refresh incline
           require('incline').refresh()
@@ -42,7 +43,7 @@ return {
         -- Show harpoon list
         '<leader><leader><leader>',
         function()
-          harpoon.ui:toggle_quick_menu(harpoon:list())
+          Harpoon.ui:toggle_quick_menu(Harpoon:list())
         end,
         'Harpoon list',
       }
@@ -67,8 +68,11 @@ return {
       }):find()
     end
 
-    vim.keymap.set('n', '<C-e>', function() toggle_telescope(harpoon:list()) end,
-      { desc = 'Open harpoon window' })
+    useMap.nmap(
+      '<C-e>',
+      function() toggle_telescope(Harpoon:list()) end,
+      'Open harpoon window'
+    )
 
     require('harpoon'):extend(require('harpoon.extensions').builtins.highlight_current_file())
   end,
