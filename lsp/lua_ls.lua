@@ -1,6 +1,6 @@
 return {
-  filetypes = { 'lua' },
   cmd = { 'lua-language-server' },
+  filetypes = { 'lua' },
   root_markers = {
     '.emmyrc.json',
     '.luarc.json',
@@ -12,15 +12,6 @@ return {
     'selene.yml',
     '.editorconfig',
   },
-
-  on_attach = function(_, bufnr)
-    -- vim.api.nvim_create_autocmd('BufWritePre', {
-    --   buffer = bufnr,
-    --   callback = function()
-    --     vim.lsp.buf.format()
-    --   end,
-    -- })
-  end,
 
   settings = {
     Lua = {

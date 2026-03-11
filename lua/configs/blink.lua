@@ -1,4 +1,4 @@
-require('blink.cmp').setup {
+return {
   fuzzy = {
     implementation = 'prefer_rust'
   },

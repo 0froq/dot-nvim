@@ -1,4 +1,5 @@
 return {
+  cmd = { 'vscode-eslint-language-server', '--stdio' },
   filetypes = {
     'javascript',
     'javascriptreact',
@@ -24,7 +25,6 @@ return {
     'pcss',
     'postcss',
   },
-  cmd = { 'vscode-eslint-language-server', '--stdio' },
   root_markers = {
     '.eslintrc.js',
     '.eslintrc.cjs',
@@ -50,11 +50,6 @@ return {
         },
       }, nil, bufnr)
     end, {})
-
-    -- vim.api.nvim_create_autocmd('BufWritePre', {
-    --   buffer = bufnr,
-    --   command = 'LspEslintFixAll',
-    -- })
   end,
 
   settings = {
@@ -94,16 +89,16 @@ return {
     --   },
     -- },
     rulesCustomizations = {
-      -- { rule = 'style/*',   severity = 'off', fixable = true },
-      -- { rule = 'format/*',  severity = 'off', fixable = true },
-      -- { rule = '*-indent',  severity = 'off', fixable = true },
-      -- { rule = '*-spacing', severity = 'off', fixable = true },
-      -- { rule = '*-spaces',  severity = 'off', fixable = true },
-      -- { rule = '*-order',   severity = 'off', fixable = true },
-      -- { rule = '*-dangle',  severity = 'off', fixable = true },
-      -- { rule = '*-newline', severity = 'off', fixable = true },
-      -- { rule = '*quotes',   severity = 'off', fixable = true },
-      -- { rule = '*semi',     severity = 'off', fixable = true },
+      { rule = 'style/*',   severity = 'off', fixable = true },
+      { rule = 'format/*',  severity = 'off', fixable = true },
+      { rule = '*-indent',  severity = 'off', fixable = true },
+      { rule = '*-spacing', severity = 'off', fixable = true },
+      { rule = '*-spaces',  severity = 'off', fixable = true },
+      { rule = '*-order',   severity = 'off', fixable = true },
+      { rule = '*-dangle',  severity = 'off', fixable = true },
+      { rule = '*-newline', severity = 'off', fixable = true },
+      { rule = '*quotes',   severity = 'off', fixable = true },
+      { rule = '*semi',     severity = 'off', fixable = true },
     },
   },
 }

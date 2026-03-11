@@ -1,10 +1,10 @@
 return {
   cmd = {
-    "julia",
-    "--project=".."~/.julia/environments/lsp/",
-    "--startup-file=no",
-    "--history-file=no",
-    "-e", [[
+    'julia',
+    '--project=' .. '~/.julia/environments/lsp/',
+    '--startup-file=no',
+    '--history-file=no',
+    '-e', [[
     using Pkg
     Pkg.instantiate()
     using LanguageServer
@@ -32,8 +32,8 @@ return {
   run(server)
   ]]
   },
-  filetypes = { "julia" },
+  filetypes = { 'julia' },
   on_attach = function(client, bufnr)
-    vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
+    vim.api.nvim_set_option_value('omnifunc', 'v:lua.vim.lsp.omnifunc', { buf = bufnr })
   end
 }
