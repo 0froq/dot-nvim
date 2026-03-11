@@ -1,7 +1,7 @@
 return {
   'nvim-mini/mini.bufremove',
   version = false,
-  lazy = false,
+  event = 'VeryLazy',
   opts = {},
   config = function(_, opts)
     local MiniBufremove = require('mini.bufremove')

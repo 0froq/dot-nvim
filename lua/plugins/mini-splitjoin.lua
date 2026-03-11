@@ -1,6 +1,6 @@
 return {
-  "nvim-mini/mini.splitjoin",
+  'nvim-mini/mini.splitjoin',
   version = false,
-  lazy = false,
+  event = 'VeryLazy',
   opts = {}
 }

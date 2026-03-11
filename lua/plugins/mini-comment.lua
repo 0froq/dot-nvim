@@ -1,29 +1,28 @@
 return {
   'nvim-mini/mini.comment',
   version = false,
-  lazy = false,
-  opts = {
-    options = {
-      -- ignore_blank_line = true,
-    }
-  },
-  config = function()
-    local MiniComment = require('mini.comment')
+  event = 'BufReadPre',
+  opts = function()
     local TsContextCommentstring = require('ts_context_commentstring')
 
-    local map = require('utils').map
-
-    MiniComment.setup({
+    return {
       options = {
         ignore_blank_line = false,
         custom_commentstring = function()
           return TsContextCommentstring.calculate_commentstring() or vim.bo.commentstring
         end,
       },
-    })
+    }
+  end,
+  config = function()
+    local MiniComment = require('mini.comment')
+
+    MiniComment.setup()
+
+    local useMap = require('useMap')
 
     -- Key map
-    map('n', '<leader>/', 'gcc', { desc = 'Comment', remap = true })
-    map('v', '<leader>/', 'gc', { desc = 'Comment', remap = true })
+    useMap.nvmap('<leader>/', 'gcc', { desc = 'Comment', remap = true })
+    useMap.nvmap('<leader>/', 'gc', { desc = 'Comment', remap = true })
   end
 }

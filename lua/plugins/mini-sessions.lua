@@ -1,7 +1,7 @@
 return {
   'nvim-mini/mini.sessions',
   version = false,
-  lazy = false,
+  event = 'VimEnter',
   opts = {
     autoread = false,
     autowrite = true,
@@ -14,15 +14,15 @@ return {
   config = function(_, opts)
     local MiniSessions = require('mini.sessions')
 
-    local map = require('utils').map
+    local useMap = require('useMap')
 
     MiniSessions.setup(opts)
 
-    map('n', '<leader>sw', function()
+    useMap.nmap('<leader>sw', function()
       MiniSessions.write('.session.vim')
     end, 'Write session')
 
-    map('n', '<leader>sl', function()
+    useMap.nmap('<leader>sl', function()
       MiniSessions.read()
     end, 'Load last session')
   end

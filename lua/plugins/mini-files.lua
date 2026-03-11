@@ -1,7 +1,7 @@
 return {
   'nvim-mini/mini.files',
   version = false,
-  lazy = false,
+  event = 'VimEnter',
   opts = function()
     return {
       content = {
