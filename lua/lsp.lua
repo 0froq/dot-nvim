@@ -15,31 +15,31 @@ else
 end
 
 -- Enhanced capabilities for better completion and other features
--- capabilities.textDocument.completion.completionItem.snippetSupport = true
--- capabilities.textDocument.completion.completionItem.preselectSupport = true
--- capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
--- capabilities.textDocument.completion.completionItem.deprecatedSupport = true
--- capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
--- capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
--- capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
--- capabilities.textDocument.completion.completionItem.resolveSupport = {
---   properties = { 'documentation', 'detail', 'additionalTextEdits' },
--- }
--- capabilities.textDocument.completion.completionItem.documentationFormat = {
---   'markdown'
--- }
--- capabilities.textDocument.codeAction = {
---   dynamicRegistration = true,
---   codeActionLiteralSupport = {
---     codeActionKind = {
---       valueSet = (function()
---         local res = vim.tbl_values(vim.lsp.protocol.CodeActionKind)
---         table.sort(res)
---         return res
---       end)(),
---     },
---   },
--- }
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.preselectSupport = true
+capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = { 'documentation', 'detail', 'additionalTextEdits' },
+}
+capabilities.textDocument.completion.completionItem.documentationFormat = {
+  'markdown'
+}
+capabilities.textDocument.codeAction = {
+  dynamicRegistration = true,
+  codeActionLiteralSupport = {
+    codeActionKind = {
+      valueSet = (function()
+        local res = vim.tbl_values(vim.lsp.protocol.CodeActionKind)
+        table.sort(res)
+        return res
+      end)(),
+    },
+  },
+}
 
 vim.diagnostic.config {
   virtual_lines = {
@@ -67,7 +67,7 @@ vim.diagnostic.config {
 
 local function setup_server(server_name, config)
   -- Set capabilities
-  config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
+  config.capabilities = vim.tbl_deep_extend('force', capabilities, config.capabilities or {})
 
   vim.lsp.config(server_name, config)
   vim.lsp.enable(server_name)
