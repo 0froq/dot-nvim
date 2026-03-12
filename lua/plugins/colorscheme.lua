@@ -7,17 +7,6 @@ return {
     priority = 1000,
     opts = {
       style = 'dark',
-      mono = {
-        enabled = false,
-        keep = {
-          keyword = true,
-          func = true,
-          variable = true,
-          number = true,
-          boolean = true,
-          float = true
-        }
-      }
     }
   },
 }
