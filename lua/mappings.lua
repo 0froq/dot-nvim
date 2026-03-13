@@ -28,16 +28,8 @@ useMap.nmap('K', function()
   vim.lsp.buf.hover({ border = 'single', max_width = 100, max_height = 25, focusable = true, source = true })
 end, 'Hover')
 
+--- Maximum current split
+-- useMap.nmap('<leader><CR>', )
+
 -- -- Notification
 -- map("n", "<leader>N", snacks.notifier.show_history, "Show Notification History")
-
-
--- Only when not in VS Code
-if not vim.g.vscode then
-  -- local duck = require("duck")
-  -- map('n', '<leader>dd', function ()
-  --   duck.hatch("🐈")
-  -- end, "Duck!")
-  -- map('n', '<leader>dk', duck.cook, "Cook!")
-  -- map('n', '<leader>da', duck.cook_all, "Cook 'em all!")
-end
