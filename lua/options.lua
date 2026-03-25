@@ -8,6 +8,9 @@ if vim.fn.has('nvim-0.12') == 1 then
   o.pumborder = 'single'
 end
 
+-- Statusline
+o.laststatus = 3
+
 -- Relative line numbers
 o.number = true
 o.numberwidth = 4
@@ -28,6 +31,7 @@ o.pumblend = 0
 -- Highlight current line and line number
 o.cursorline = true
 o.cursorlineopt = 'both'
+o.guicursor = 'n-v-c-sm:block-reverse,i-ci-ve:ver50-CursorIM,r-cr-o:hor20-CursorIM'
 
 -- Tabs and indentation
 o.shiftwidth = 2
