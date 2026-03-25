@@ -40,4 +40,4 @@ vim.schedule(function()
   require 'mappings'
 end)
 
-vim.cmd [[colorscheme lig]]
+vim.cmd [[colorscheme lig-dark]]
