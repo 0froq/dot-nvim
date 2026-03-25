@@ -4,8 +4,8 @@ return {
   opts = {
     window = {
       placement = {
-        vertical = 'bottom',
-        horizontal = 'center',
+        vertical = 'top',
+        horizontal = 'right',
       },
       padding = 0,
       margin = { vertical = 0, horizontal = 0 },
@@ -16,6 +16,8 @@ return {
 
       local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ':t') or '[-]'
       local ft_icon, ft_hl = mini_icons.get('file', filename)
+
+      local general_group = props.focused and 'TablineSel' or 'StatusLine'
 
       local function get_git_diff()
         -- local icons = { delete = "- ", change = "~ ", add = "+ " }
@@ -33,7 +35,7 @@ return {
           end
         end
         if #labels > 0 then
-          table.insert(labels, { '/ ', guifg = palette.fg_reversed })
+          table.insert(labels, { '/ ', group = general_group })
         end
         return labels
       end
@@ -52,7 +54,7 @@ return {
           end
         end
         if #label > 0 then
-          table.insert(label, { '/ ', guifg = palette.fg_reversed })
+          table.insert(label, { '/ ', group = general_group })
         end
         return label
       end
@@ -64,9 +66,9 @@ return {
 
         -- if #label > 0 then
         if #marks > 0 then
-          table.insert(label, 1, { '󰛢 ', guifg = palette.azure[2] })
+          table.insert(label, 1, { '󰛢 ', group = 'DiagnosticInfo' })
           -- set hl group
-          table.insert(label, { '/ ', guifg = palette.fg_reversed })
+          table.insert(label, { '/ ', group = general_group })
         end
         return label
       end
@@ -78,27 +80,25 @@ return {
           label,
           {
             filename,
-            guifg = vim.bo[props.buf].modified and palette.amber[3] or palette.fg_reversed,
+            -- guifg = vim.bo[props.buf].modified and palette.amber[2] or palette.fg_reversed,
+            group = vim.bo[props.buf].modified and 'DiagnosticWarn' or general_group,
             gui = vim.bo[props.buf].modified and 'italic' or ''
           }
         )
-        if not props.focused then
-          label['group'] = 'BufferInactive'
-        end
 
         return label
       end
 
       return {
-        { ' ', guibg = palette.bg_reversed },
+        { ' ', group = general_group },
         {
           { get_diagnostic_label() },
           { get_git_diff() },
           { get_harpoon_items() },
           { get_file_name() },
-          guibg = palette.bg_reversed,
+          group = general_group,
         },
-        { ' ', guibg = palette.bg_reversed },
+        { ' ', group = general_group },
       }
     end,
   }
