@@ -24,7 +24,11 @@ return {
 
       for _, d in ipairs(diagnostics) do
         local s = d.severity
-        if s and s >= 1 and s <= 4 then
+        -- Limit the num to 5
+        if counts[s] >= 4 then
+          counts[s] = 4
+        end
+        if s and s >= 1 and s < 4 then
           counts[s] = counts[s] + 1
         end
       end
