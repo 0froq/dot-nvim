@@ -26,8 +26,5 @@ return {
     useMap.nmap('ss', function()
       MiniJump2d.start(MiniJump2d.builtin_opts.single_character)
     end, { desc = 'Jump char' })
-    useMap.nmap('<cr>', function()
-      MiniJump2d.start(MiniJump2d.builtin_opts.line_start)
-    end, { desc = 'Jump lines', noremap = true, silent = true })
   end,
 }
