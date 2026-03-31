@@ -3,10 +3,7 @@ local opt = vim.opt
 local g = vim.g
 local o = vim.o
 
--- Get neovim version
-if vim.fn.has('nvim-0.12') == 1 then
-  o.pumborder = 'single'
-end
+o.pumborder = 'single'
 
 -- Statusline
 o.laststatus = 3
