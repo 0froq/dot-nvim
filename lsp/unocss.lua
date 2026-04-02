@@ -1,6 +1,6 @@
 return {
   cmd = {
-    vim.fn.stdpath('data') .. '/mason/bin/unocss-language-server',
+    'unocss-language-server',
     '--stdio'
   },
   filetypes = {
@@ -34,7 +34,6 @@ return {
     'uno.config.js',
     'uno.config.ts'
   },
-  -- root_dir = vim.fs.root(0, { 'uno.config.mjs', 'uno.config.mts', 'uno.config.js', 'uno.config.ts' }),
   root_dir = function(bufnr, on_dir)
     local root = vim.fs.root(bufnr, {
       'uno.config.ts',
