@@ -3,7 +3,9 @@ local opt = vim.opt
 local g = vim.g
 local o = vim.o
 
-o.pumborder = 'single'
+if vim.fn.has('nvim-0.12') == 1 then
+  o.pumborder = 'single'
+end
 
 -- Statusline
 o.laststatus = 3
@@ -35,6 +37,8 @@ o.shiftwidth = 2
 o.smartindent = true
 o.expandtab = true
 o.tabstop = 2
+o.autoindent = true
+vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
 -- Special characters display
 o.list = true
