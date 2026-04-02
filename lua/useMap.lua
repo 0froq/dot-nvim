@@ -1,6 +1,6 @@
 -- File Name: useMap.lua
--- Last Modified: 2026-03-11 10:05:57
--- Line Count: 308
+-- Last Modified: 2026-03-31 19:19:24
+-- Line Count: 315
 -- Git Status: unknown
 --
 -- Unified Keymap Mapper for Neovim + VSCode
@@ -173,8 +173,15 @@ M.map = function(mods, key, func, opts)
   end
   opts = opts or {}
 
+  local handler
+
   -- Resolve handler based on environment
-  local handler = resolve_handler(func, opts.use_call)
+  if type(func) == 'string' and func:sub(1, 1) ~= ':' then
+    handler = func
+  else
+    handler = resolve_handler(func, opts.use_call)
+  end
+
 
   -- Set the keymap
   if type(key) == 'string' then
