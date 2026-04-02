@@ -1,5 +1,5 @@
 return {
-  'Fro-Q/headup.nvim',
+  '0froq/headup.nvim',
   dev = true,
   dir = '/Users/oQ/2_areas/development/nvim_plugins/headup.nvim',
   event = { 'BufReadPre', 'BufNewFile' },
