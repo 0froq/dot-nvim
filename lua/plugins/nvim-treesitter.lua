@@ -2,6 +2,9 @@ return {
   'nvim-treesitter/nvim-treesitter',
   lazy = false,
   build = ':TSUpdate',
+  dependencies = {
+    'RRethy/nvim-treesitter-endwise',
+  },
   config = function()
     ---@diagnostic disable-next-line: missing-fields
     require('nvim-treesitter.configs').setup({
@@ -23,6 +26,7 @@ return {
         'tsx',
         'go',
         'markdown',
+        'vimdoc'
       },
       highlight = {
         enable = true,
