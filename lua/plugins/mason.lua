@@ -9,6 +9,9 @@ return {
     return {
       pip = { upgrade_pip = false, install_args = pip_args },
       ui = { border = 'single', width = 0.7, height = 0.7 },
+      ensure_installed = {
+        'tinymist',
+      },
     }
   end,
 }

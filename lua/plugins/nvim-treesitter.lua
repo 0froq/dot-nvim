@@ -26,7 +26,8 @@ return {
         'tsx',
         'go',
         'markdown',
-        'vimdoc'
+        'vimdoc',
+        'typst'
       },
       highlight = {
         enable = true,
