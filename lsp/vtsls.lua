@@ -1,6 +1,12 @@
 return {
   cmd = { 'vtsls', '--stdio' },
-  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+  filetypes = {
+    'typescript',
+    'javascript',
+    'javascriptreact',
+    'typescriptreact',
+    'vue'
+  },
   settings = {
     vtsls = {
       tsserver = {

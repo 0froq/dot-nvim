@@ -1,6 +1,12 @@
 return {
   cmd = { 'vue-language-server', '--stdio' },
-  filetypes = { 'vue', 'typescript', 'javascript', 'javascriptreact', 'typescriptreact' },
+  filetypes = {
+    'vue',
+    'typescript',
+    'javascript',
+    'javascriptreact',
+    'typescriptreact'
+  },
   on_init = function(client)
     client.handlers['tsserver/request'] = function(_, result, context)
       local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = 'vtsls' })

@@ -5,7 +5,7 @@ return {
   event = { 'BufReadPre', 'BufNewFile' },
   opts = {
     enabled = true,
-    silent = false,
+    silent = true,
     time_format = '%Y-%m-%d %H:%M:%S',
     max_lines = 20,
     end_pattern = '^%s*$',             -- stop at first empty line
