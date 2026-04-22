@@ -20,7 +20,13 @@ useMap.batch({
   mode = { 'i', 't' },
   { 'aa', '<ESC>',           'Escape insert mode' },
   { 'ww', '<ESC><cmd>w<cr>', 'Escape insert mode' },
-  { 'zz', '<ESC>zza',        'Center'}
+  { 'zz', '<ESC>zza',        'Center' }
+})
+
+-- Yank current filename, relative path
+useMap.batch({
+  mode = { 'n' },
+  { '<leader>yb', ':let @+ = expand("%:t")', 'Yank filename' },
 })
 
 useMap.nmap('<leader>nh', '<cmd>noh<CR>', 'General clear highlights')
