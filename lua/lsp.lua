@@ -97,13 +97,26 @@ end
 
 local useMap = require('useMap')
 
+local excluded_format_pairs = {
+  -- ['markdown'] = { 'eslint' },
+}
+
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local bufnr = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     -- Mappings
     useMap.nmap('<leader>cf', function()
-      vim.lsp.buf.format { async = true }
+      vim.lsp.buf.format {
+        async = true,
+        filter = function(c)
+          local filetype = vim.api.nvim_get_option_value('filetype', { buf = bufnr })
+          if excluded_format_pairs[filetype] and vim.tbl_contains(excluded_format_pairs[filetype], c.name) then
+            return false
+          end
+          return true
+        end
+      }
     end, { buffer = bufnr, desc = 'Format current buffer with LSP' })
 
     if client and client.name == 'eslint' then
