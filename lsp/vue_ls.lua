@@ -7,6 +7,7 @@ return {
     'javascriptreact',
     'typescriptreact'
   },
+  -- root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
   on_init = function(client)
     client.handlers['tsserver/request'] = function(_, result, context)
       local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = 'vtsls' })

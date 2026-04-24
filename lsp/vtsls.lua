@@ -7,6 +7,7 @@ return {
     'typescriptreact',
     'vue'
   },
+  -- root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json', '.git' },
   settings = {
     vtsls = {
       tsserver = {
