@@ -30,7 +30,7 @@ o.pumblend = 0
 -- Highlight current line and line number
 o.cursorline = true
 o.cursorlineopt = 'both'
-o.guicursor = 'n-v-c-sm:block-reverse,i-ci-ve:ver50-CursorIM,r-cr-o:hor20-CursorIM'
+o.guicursor = 'n-v-c-sm:block-reverse,i-ci-ve:ver50-CursorIM,r-cr-o:hor20-CursorIM,t:ver50-CursorIM'
 
 -- Tabs and indentation
 o.shiftwidth = 2

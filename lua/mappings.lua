@@ -1,8 +1,9 @@
 -- Delete shit maps
--- vim.keymap.del('n', 'gra')
--- vim.keymap.del('n', 'gri')
+vim.keymap.del('n', 'gra')
+vim.keymap.del('n', 'gri')
 vim.keymap.del('n', 'grr')
--- vim.keymap.del('n', 'grn')
+vim.keymap.del('n', 'grt')
+vim.keymap.del('n', 'grn')
 
 local useMap = require('useMap')
 
@@ -21,6 +22,16 @@ useMap.batch({
   { 'aa', '<ESC>',           'Escape insert mode' },
   { 'ww', '<ESC><cmd>w<cr>', 'Escape insert mode' },
   { 'zz', '<ESC>zza',        'Center' }
+})
+
+useMap.batch({
+  mode = { 'i', 't' },
+  { '_-',  '--',   '.' },
+  { '+=',  '==',   '.' },
+  { '|\\', '\\\\', '.' },
+  { '<,',  ',,',   '.' },
+  { '>.',  '..',   '.' },
+  { '?/',  '//',   '.' }
 })
 
 -- Yank current filename, relative path
