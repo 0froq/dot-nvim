@@ -27,7 +27,8 @@ return {
         'go',
         'markdown',
         'vimdoc',
-        'typst'
+        'typst',
+        'kdl'
       },
       highlight = {
         enable = true,

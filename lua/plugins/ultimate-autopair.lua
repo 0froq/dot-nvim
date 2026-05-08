@@ -14,8 +14,8 @@ return {
       enable = true,
     },
     fastwarp = {
-      map = ']]',
-      rmap = '[[',
+      map = '<c-f>',
+      rmap = '<c-b>',
       nocursormove = false,
     }
   },
