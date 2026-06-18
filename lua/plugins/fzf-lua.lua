@@ -70,7 +70,7 @@ return {
           ['enter']  = actions.file_edit_or_qf,
           ['ctrl-s'] = actions.file_split,
           ['ctrl-v'] = actions.file_vsplit,
-          ['ctrl-t'] = actions.file_tabedit,
+          ['ctrl-e'] = actions.file_tabedit,
           ['alt-h']  = actions.toggle_hidden,
           ['alt-i']  = actions.toggle_ignore,
         },
